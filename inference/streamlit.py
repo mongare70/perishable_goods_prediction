@@ -1,6 +1,9 @@
 import streamlit as st
 import requests
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 st.title("Perishable goods prediction")
 
 with st.form("form"):
@@ -51,7 +54,7 @@ if submitted:
             "Week_Number": week_number,
         }
 
-        api_url = "http://127.0.0.1:8000/predict"
+        api_url = f"http://{os.getenv("host", "127.0.0.1")}:{os.getenv("port", 3000)}/predict"
         response = requests.post(api_url, json={"records": [data]})
 
         if response.status_code == 200:

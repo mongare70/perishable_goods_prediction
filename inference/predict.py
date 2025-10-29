@@ -55,4 +55,4 @@ def predict(req: Item):
 if __name__ == "__main__":
     print(os.getenv("port"))
     print(f"Server us running on port {os.getenv('port', 3000)}")
-    uvicorn.run(app, host="127.0.0.1", port=int(os.getenv("port", 3000)))
+    uvicorn.run(app, host=os.getenv("host", "127.0.0.1"), port=int(os.getenv("port", 3000)))
