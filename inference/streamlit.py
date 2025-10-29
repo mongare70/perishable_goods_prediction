@@ -54,7 +54,7 @@ if submitted:
             "Week_Number": week_number,
         }
 
-        api_url = f"{os.getenv("host", "127.0.0.1")}/predict"
+        api_url = f"http://{os.getenv("host", "127.0.0.1")}/predict"
         response = requests.post(api_url, json={"records": [data]})
 
         if response.status_code == 200:

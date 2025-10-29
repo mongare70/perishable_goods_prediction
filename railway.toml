@@ -1,5 +1,0 @@
-[build]
-commands = [
-  "git lfs install",
-  "git lfs pull"
-]

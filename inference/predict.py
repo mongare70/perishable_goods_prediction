@@ -7,6 +7,8 @@ from typing import Dict, List, Any
 import os
 import uvicorn
 from dotenv import load_dotenv
+import requests
+from io import BytesIO
 
 load_dotenv()
 app = FastAPI(title="Perishable Goods Prediction API", version="1.0")
@@ -38,10 +40,15 @@ def predict(req: Item):
     try:
         data = pd.DataFrame(req.records)
         cleaned_data = clean_data(data)
-        model_path = os.path.join(os.path.dirname(__file__), "..","model", "rf_model.pkl")
+        # model_path = os.path.join(os.path.dirname(__file__), "..","model", "rf_model.pkl")
+        # with open(model_path, "rb") as f:
+        #     model = pickle.load(f)
 
-        with open(model_path, "rb") as f:
-            model = pickle.load(f)
+        response = requests.get(os.getenv("model_url_hugging_face"))
+        response.raise_for_status()
+
+        model = pickle.load(BytesIO(response.content)) 
+                
 
         pred = model.predict(cleaned_data)
 
