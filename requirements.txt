@@ -6,6 +6,7 @@ seaborn
 ipykernel
 fastapi
 uvicorn
+gunicorn 
 ipykernel
 dotenv
 streamlit
