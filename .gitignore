@@ -3,3 +3,4 @@ venv
 __pycache__
 input-files
 rf_model.pkl
+mlruns
